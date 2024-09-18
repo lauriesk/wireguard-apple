@@ -23,18 +23,10 @@ let package = Package(
             dependencies: [],
             publicHeadersPath: "."
         ),
-        .target(
+        .binaryTarget(
             name: "WireGuardKitGo",
-            dependencies: [],
-            exclude: [
-                "goruntime-boottime-over-monotonic.diff",
-                "go.mod",
-                "go.sum",
-                "api-apple.go",
-                "Makefile"
-            ],
-            publicHeadersPath: ".",
-            linkerSettings: [.linkedLibrary("wg-go")]
+            url: "https://github.com/battlmonstr/wireguard-apple/releases/download/1.0.15.13/WireGuardKitGo.xcframework.zip",
+            checksum: "c01d7c8d2523f23f1287871af482c3c464e0a9a6062445e036995fbdedb93498"
         )
     ]
 )

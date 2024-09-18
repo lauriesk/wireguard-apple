@@ -1,0 +1,27 @@
+name: Create Release
+
+# Create XCFramework when a version is tagged
+on:
+  push:
+    tags:
+      - 1.**
+
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: macos-12
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.21.x
+
+      - uses: actions/checkout@v3
+
+      - name: Build WireGuardKitGo
+        run: make wg-go-framework-zip
+
+      - uses: ncipollo/release-action@v1.12.0
+        with:
+          artifacts: Sources/WireGuardKitGo/out/WireGuardKitGo.xcframework.zip
+          bodyFile: Sources/WireGuardKitGo/out/WireGuardKitGo.xcframework.zip.sha256
+          makeLatest: true
